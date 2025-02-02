@@ -1,0 +1,91 @@
+/* Tailwind base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pastel colors */
+:root {
+  --background: #f5e0e1; /* Soft pastel pink */
+  --foreground: #6c6b71; /* Muted grayish brown */
+  --accent: #f7c6e1; /* Light pastel pink */
+  --button: #b8d9ea; /* Soft pastel blue */
+  --highlight: #c3b9d0; /* Pastel lavender for hover or highlights */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #3e3b3d; /* Muted dark for dark mode */
+    --foreground: #f0e4d7; /* Light beige text for contrast */
+    --accent: #f1c9c1; /* Soft pastel pink */
+    --button: #a6d8e4; /* Muted pastel blue */
+    --highlight: #b8a8d9; /* Light lavender for hover or highlights */
+  }
+}
+
+/* Global body styles */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Link and button styling */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--highlight);
+}
+
+button {
+  background-color: var(--button);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #a4c7d6; /* Slightly darker pastel blue on hover */
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* Styling for the wedding page */
+.wedding-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--foreground);
+}
+
+.wedding-slider-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Slider image styles */
+.wedding-slider-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
