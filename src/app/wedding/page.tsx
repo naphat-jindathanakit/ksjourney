@@ -92,16 +92,16 @@ const WeddingPage = () => {
         className={`flex-1 p-6 ${!isOpen ? "ml-16" : "ml-60"} bg-sunsetOrange`}
       >
         {/* Wedding Page Header */}
-        <h1 className="text-4xl font-bold text-sunsetYellow mb-6 text-center">
+        <h1 className="text-4xl font-bold text-sunsetYellow mb-6 text-center signature-font">
           Kwang & Suea Wedding
         </h1>
 
         {/* Invitation Text */}
         <div className="bg-sunsetPink p-6 rounded-lg shadow-lg text-center max-w-3xl mx-auto mb-8">
-          <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4">
+          <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4 js-synjai-font">
             You're Invited to Our Special Day!
           </h2>
-          <p className="text-lg text-[#4E3B31]">
+          <p className="text-lg text-[#4E3B31] invitation-text">
             We are thrilled to share this joyous occasion with you! Join us as
             we celebrate the union of two hearts, bound together by love and
             destiny. Your presence will make this day even more memorable.
