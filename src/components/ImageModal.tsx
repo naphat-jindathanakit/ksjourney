@@ -12,12 +12,12 @@ const ImageModal: FC<ImageModalProps> = ({ isOpen, images, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-[#8f7e63] p-6 rounded-lg max-w-4xl w-full overflow-hidden relative">
+    <div className="fixed inset-0 bg-sunsetPurple bg-opacity-80 flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded-lg max-w-4xl w-full overflow-hidden relative shadow-2xl">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white bg-[#6e4b3d] rounded-full p-2 hover:bg-[#4a3624] transition-all duration-300"
+          className="absolute top-4 right-4 text-white bg-sunsetOrange rounded-full p-2 hover:bg-sunsetYellow transition-all duration-300"
         >
           X
         </button>
@@ -30,7 +30,7 @@ const ImageModal: FC<ImageModalProps> = ({ isOpen, images, onClose }) => {
                 <img
                   src={image}
                   alt={`Wedding Image ${index + 1}`}
-                  className="w-full max-w-[200px] h-auto rounded-lg shadow-lg"
+                  className="w-full max-w-[200px] h-auto rounded-lg shadow-lg border-2 border-sunsetPink"
                 />
               </div>
             ))}

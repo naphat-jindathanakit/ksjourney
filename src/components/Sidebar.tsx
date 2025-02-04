@@ -34,19 +34,21 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 z-50 flex flex-col bg-[#A7C7E7] text-white p-4 ${
+      className={`fixed top-0 left-0 z-50 flex flex-col bg-sunsetPurple text-white p-4 ${
         isOpen ? "w-60" : "w-16"
-      } h-full min-h-screen transition-all duration-300`} // Fixed positioning for the sidebar
+      } h-full min-h-screen transition-all duration-300`} // Use sunsetPurple for contrast with background
     >
       {/* Sidebar content */}
       {isOpen && (
         <div className="flex flex-col items-center mb-6 w-full">
-          <h2 className="text-lg font-bold mb-4 text-[#D1C4E9]">Menu</h2>{" "}
+          <h2 className="text-lg font-bold mb-4 text-sunsetYellow">Menu</h2>{" "}
           {/* Bold "Menu" text with a contrasting color */}
           <ul className="space-y-4 w-full">
             <li
               className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
-                selectedMenu === "Home" ? "bg-[#FFB3BA]" : "hover:bg-[#FFB3BA]"
+                selectedMenu === "Home"
+                  ? "bg-sunsetPink"
+                  : "hover:bg-sunsetPink"
               }`}
               onClick={() => navigateTo("Home")}
             >
@@ -55,8 +57,8 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
             <li
               className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
                 selectedMenu === "Wedding"
-                  ? "bg-[#FFB3BA]"
-                  : "hover:bg-[#FFB3BA]"
+                  ? "bg-sunsetPink"
+                  : "hover:bg-sunsetPink"
               }`}
               onClick={() => navigateTo("Wedding")}
             >
@@ -70,7 +72,7 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
       {/* Toggle button */}
       <button
         onClick={handleToggleSidebar} // Toggle the sidebar open/close when clicked
-        className="absolute bottom-8 left-4 p-2 bg-[#C8E6C9] rounded-full hover:bg-[#A7C7E7] transition-colors"
+        className="absolute bottom-8 left-4 p-2 bg-sunsetPeach rounded-full hover:bg-sunsetYellow transition-colors"
       >
         {/* Show the appropriate arrow icon */}
         {isOpen ? (

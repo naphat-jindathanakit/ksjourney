@@ -22,12 +22,12 @@ const SingleImageModal: FC<SingleImageModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-[#A7C7E7] bg-opacity-80 flex justify-center items-center z-50">
-      <div className="relative w-full max-w-4xl p-6">
+    <div className="fixed inset-0 bg-sunsetPurple bg-opacity-80 flex justify-center items-center z-50">
+      <div className="relative w-full max-w-4xl p-6 bg-white rounded-lg shadow-xl">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white bg-[#FFB3BA] rounded-full p-2 hover:bg-[#D1C4E9] transition-all duration-300 z-10"
+          className="absolute top-4 right-4 text-white bg-sunsetOrange rounded-full p-2 hover:bg-sunsetYellow transition-all duration-300 z-10"
         >
           <X />
         </button>
@@ -37,7 +37,7 @@ const SingleImageModal: FC<SingleImageModalProps> = ({
           <img
             src={image}
             alt="Wedding Image"
-            className="object-contain max-w-full max-h-[80vh] rounded-lg shadow-2xl border-2 border-[#D1C4E9]"
+            className="object-contain max-w-full max-h-[80vh] rounded-lg shadow-2xl border-2 border-sunsetPink"
           />
         </div>
 

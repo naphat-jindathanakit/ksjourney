@@ -9,15 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        pastelPink: "#FFB3BA",
-        pastelYellow: "#FFF5BA",
-        pastelGreen: "#C8E6C9",
-        pastelBlue: "#A7C7E7",
-        pastelPurple: "#D1C4E9",
-        lightPeach: "#FFEBB7",
-        softLavender: "#E6C9D7",
+        sunsetOrange: "#FF9A8B",
+        sunsetPink: "#FFB6C1",
+        sunsetPeach: "#FFCC99",
+        sunsetYellow: "#FFD699",
+        sunsetPurple: "#D1A7E2",
       },
     },
   },

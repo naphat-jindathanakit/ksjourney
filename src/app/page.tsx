@@ -10,10 +10,10 @@ const Page = () => {
   const toggleSidebar = () => setIsOpen((prev) => !prev);
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row bg-sunsetOrange">
+      {/* Sunset Orange for Background */}
       {/* Pass isOpen and the toggle function to Sidebar */}
       <Sidebar onToggle={toggleSidebar} />
-
       {/* Main content */}
       <div
         className={`flex-1 p-6 flex flex-col items-center justify-start transition-all duration-300 ${
@@ -21,7 +21,7 @@ const Page = () => {
         }`} // Adjust for mobile and larger screens
       >
         {/* Header Section */}
-        <h1 className="text-3xl md:text-5xl font-bold text-center text-[#FFB3BA] mb-6 mt-8">
+        <h1 className="text-3xl md:text-5xl font-bold text-center text-sunsetYellow mb-6 mt-8">
           Kwang & Suea Journey
         </h1>
 
@@ -35,7 +35,7 @@ const Page = () => {
         </div>
 
         {/* Description Block */}
-        <div className="bg-[#FFF5BA] p-6 rounded-lg shadow-lg text-center max-w-3xl w-full">
+        <div className="bg-sunsetPink p-6 rounded-lg shadow-lg text-center max-w-3xl w-full">
           <p className="text-lg text-[#4E3B31]">
             We are Kwang & Suea, two souls bound by love and destiny. Our
             journey has been one full of laughter, adventures, and beautiful

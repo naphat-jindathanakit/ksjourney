@@ -73,16 +73,16 @@ const WeddingPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-sunsetOrange">
       {/* Sidebar */}
       <Sidebar onToggle={toggleSidebar} />
 
       {/* Main content */}
       <div
-        className={`flex-1 p-6 bg-[#FFF5BA] ${!isOpen ? "ml-16" : "ml-60"} `}
+        className={`flex-1 p-6 ${!isOpen ? "ml-16" : "ml-60"} bg-sunsetOrange`}
       >
         {/* Wedding Page Header */}
-        <h1 className="text-4xl font-bold text-[#8E6E53] mb-6 text-center">
+        <h1 className="text-4xl font-bold text-sunsetYellow mb-6 text-center">
           Kwang & Suea Wedding
         </h1>
         {/* Image Slider */}
@@ -92,7 +92,7 @@ const WeddingPage = () => {
         {/* View Full Album Button */}
         <button
           onClick={() => openModal(images)}
-          className="bg-[#C8E6C9] text-white px-6 py-3 rounded-lg mb-8 hover:bg-[#A7C7E7] transition-all duration-300 block mx-auto"
+          className="bg-sunsetYellow text-sunsetOrange px-6 py-3 rounded-lg mb-8 hover:bg-sunsetPeach transition-all duration-300 block mx-auto"
         >
           View Full Album
         </button>
@@ -122,7 +122,7 @@ const WeddingPage = () => {
         </div>
 
         {/* QR Code with "Support Us" heading */}
-        <div className="bg-[#D1C4E9] p-8 rounded-lg shadow-md mt-8 w-full max-w-2xl mx-auto">
+        <div className="bg-sunsetPurple p-8 rounded-lg shadow-md mt-8 w-full max-w-2xl mx-auto">
           <h2 className="text-2xl font-semibold text-white mb-4 text-center">
             Support Us
           </h2>
@@ -141,7 +141,7 @@ const WeddingPage = () => {
 
       {/* Thank You Message */}
       <div
-        className={`bg-[#A7C7E7] text-white py-4 mt-auto text-center ${
+        className={`bg-sunsetPeach text-white py-4 mt-auto text-center ${
           !isOpen ? "ml-16" : "ml-60"
         }`}
       >
@@ -150,7 +150,7 @@ const WeddingPage = () => {
         </p>
       </div>
 
-      {/* Single Image Modal for QR Code, Image1 and Image2 */}
+      {/* Single Image Modal for QR Code, Image1, and Image2 */}
       <SingleImageModal
         isOpen={isSingleImageModalOpen}
         image={selectedImage}
