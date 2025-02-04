@@ -1,21 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ArrowButton from "./ArrowButton";
 
-const ImageSlider = ({ images }: { images: string[] }) => {
+interface ImageSliderProps {
+  images: string[];
+  onImageClick: (image: string, index: number) => void; // Add onImageClick prop
+}
+
+const ImageSlider = ({ images, onImageClick }: ImageSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Move to the next image
   const nextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  // Move to the previous image
-  const prevImage = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
   };
 
   useEffect(() => {
@@ -30,14 +27,11 @@ const ImageSlider = ({ images }: { images: string[] }) => {
         <img
           src={images[currentIndex]}
           alt={`Wedding Image ${currentIndex + 1}`}
-          className="w-full h-auto rounded-lg shadow-lg object-contain" // Updated to object-contain to fit the full image
+          className="w-full h-auto rounded-lg shadow-lg object-contain cursor-pointer" // Updated to object-contain to fit the full image
           style={{ maxHeight: "500px" }} // Ensure image height doesn't exceed 500px
+          onClick={() => onImageClick(images[currentIndex], currentIndex)} // Trigger onImageClick when an image is clicked
         />
       </div>
-
-      {/* Prev and Next buttons */}
-      <ArrowButton direction="left" onClick={prevImage} />
-      <ArrowButton direction="right" onClick={nextImage} />
     </div>
   );
 };

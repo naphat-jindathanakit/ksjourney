@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar"; // Import Sidebar component
 import ImageSlider from "@/components/ImageSlider"; // Import ImageSlider
 import SingleImageModal from "@/components/SingleImageModal"; // Import SingleImageModal component
+import ImageModal from "@/components/ImageModal"; // Import ImageModal component
 
 const WeddingPage = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -12,6 +13,7 @@ const WeddingPage = () => {
   const [isSingleImageModalOpen, setIsSingleImageModalOpen] = useState(false); // For QR Code Modal and other images
   const [selectedImage, setSelectedImage] = useState<string>(""); // Image selected for SingleImageModal
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0); // To track the current image in modal
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false); // For Full Album Modal
 
   // QR Code images (different album)
   const qrImages = ["/images/ksQr.jpg"];
@@ -65,11 +67,19 @@ const WeddingPage = () => {
     setSelectedImage(albumImages[prevIndex]);
   };
 
-  // Open modal with full album
-  const openModal = (selectedImages: string[]) => {
-    setAlbumImages(selectedImages);
-    setSelectedImage(selectedImages[0]); // Set the first image of the album as the selected image
-    setIsSingleImageModalOpen(true); // Open the modal with the selected album
+  // Open modal with full album (from slider)
+  const openSliderAlbumModal = (image: string, index: number) => {
+    openSingleImageModal(image, index, images); // Pass all images to the modal
+  };
+
+  // Open the Full Album modal
+  const openImageModal = () => {
+    setIsImageModalOpen(true);
+  };
+
+  // Close the Full Album modal
+  const closeImageModal = () => {
+    setIsImageModalOpen(false);
   };
 
   return (
@@ -87,11 +97,14 @@ const WeddingPage = () => {
         </h1>
         {/* Image Slider */}
         <div className="w-full max-w-2xl mb-6 mx-auto">
-          <ImageSlider images={images} />
+          <ImageSlider
+            images={images}
+            onImageClick={openSliderAlbumModal} // Pass openSliderAlbumModal to ImageSlider
+          />
         </div>
         {/* View Full Album Button */}
         <button
-          onClick={() => openModal(images)}
+          onClick={openImageModal} // Open the ImageModal when clicked
           className="bg-sunsetYellow text-sunsetOrange px-6 py-3 rounded-lg mb-8 hover:bg-sunsetPeach transition-all duration-300 block mx-auto"
         >
           View Full Album
@@ -157,6 +170,13 @@ const WeddingPage = () => {
         onClose={closeSingleImageModal}
         onNext={handleNextImage}
         onPrevious={handlePreviousImage}
+      />
+
+      {/* Image Modal for Full Album */}
+      <ImageModal
+        isOpen={isImageModalOpen}
+        images={images}
+        onClose={closeImageModal} // Close function
       />
     </div>
   );
