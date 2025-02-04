@@ -95,6 +95,19 @@ const WeddingPage = () => {
         <h1 className="text-4xl font-bold text-sunsetYellow mb-6 text-center">
           Kwang & Suea Wedding
         </h1>
+
+        {/* Invitation Text */}
+        <div className="bg-sunsetPink p-6 rounded-lg shadow-lg text-center max-w-3xl mx-auto mb-8">
+          <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4">
+            You're Invited to Our Special Day!
+          </h2>
+          <p className="text-lg text-[#4E3B31]">
+            We are thrilled to share this joyous occasion with you! Join us as
+            we celebrate the union of two hearts, bound together by love and
+            destiny. Your presence will make this day even more memorable.
+          </p>
+        </div>
+
         {/* Image Slider */}
         <div className="w-full max-w-2xl mb-6 mx-auto">
           <ImageSlider
@@ -102,6 +115,7 @@ const WeddingPage = () => {
             onImageClick={openSliderAlbumModal} // Pass openSliderAlbumModal to ImageSlider
           />
         </div>
+
         {/* View Full Album Button */}
         <button
           onClick={openImageModal} // Open the ImageModal when clicked
