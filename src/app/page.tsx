@@ -10,15 +10,15 @@ const Page = () => {
   const toggleSidebar = () => setIsOpen((prev) => !prev);
 
   return (
-    <div className="flex flex-col md:flex-row bg-sunsetOrange">
-      {/* Sunset Orange for Background */}
-      {/* Pass isOpen and the toggle function to Sidebar */}
+    <div className="flex flex-col min-h-screen md:flex-row bg-sunsetOrange">
+      {/* Sidebar */}
       <Sidebar onToggle={toggleSidebar} />
+
       {/* Main content */}
       <div
         className={`flex-1 p-6 flex flex-col items-center justify-start transition-all duration-300 ${
           !isOpen ? "ml-16" : "ml-60"
-        }`} // Adjust for mobile and larger screens
+        } `} // Adjust for mobile and larger screens
       >
         {/* Header Section */}
         <h1 className="text-3xl md:text-5xl font-bold text-center text-sunsetYellow mb-6 mt-8">
