@@ -47,8 +47,8 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
             <li
               className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
                 selectedMenu === "Home"
-                  ? "bg-sunsetPink"
-                  : "hover:bg-sunsetPink"
+                  ? "bg-sunsetYellow"
+                  : "hover:bg-sunsetYellow"
               }`}
               onClick={() => navigateTo("Home")}
             >
@@ -57,8 +57,8 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
             <li
               className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
                 selectedMenu === "Wedding"
-                  ? "bg-sunsetPink"
-                  : "hover:bg-sunsetPink"
+                  ? "bg-sunsetGreen"
+                  : "hover:bg-sunsetGreen"
               }`}
               onClick={() => navigateTo("Wedding")}
             >

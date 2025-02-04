@@ -14,6 +14,7 @@ export default {
         sunsetPeach: "#FFCC99",
         sunsetYellow: "#FFD699",
         sunsetPurple: "#D1A7E2",
+        sunsetGreen: "#88D8B0",
       },
     },
   },
