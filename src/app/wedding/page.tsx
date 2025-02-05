@@ -5,8 +5,14 @@ import Sidebar from "@/components/Sidebar"; // Import Sidebar component
 import ImageSlider from "@/components/ImageSlider"; // Import ImageSlider
 import SingleImageModal from "@/components/SingleImageModal"; // Import SingleImageModal component
 import ImageModal from "@/components/ImageModal"; // Import ImageModal component
-// import CommentCard from "@/components/CommentCard"; // Import the CommentCard component
-
+import CommentCard from "@/components/CommentCard"; // Import the CommentCard component
+import { supabase } from "@/app/supabaseClient";
+interface Comment {
+  id: string;
+  name: string;
+  message: string;
+  created_at: string;
+}
 const WeddingPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false); // Sidebar state
@@ -15,7 +21,9 @@ const WeddingPage = () => {
   const [selectedImage, setSelectedImage] = useState<string>(""); // Image selected for SingleImageModal
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0); // To track the current image in modal
   const [isImageModalOpen, setIsImageModalOpen] = useState(false); // For Full Album Modal
-  // const [comments, setComments] = useState<any[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
 
   // QR Code images (different album)
   const qrImages = ["/images/ksQr.jpg"];
@@ -40,38 +48,30 @@ const WeddingPage = () => {
   // Example comments data
   useEffect(() => {
     const fetchComments = async () => {
-      // You can replace this with an actual fetch request to an API
-      // const fetchedComments = [
-      // {
-      //   id: 1,
-      //   name: "John Doe",
-      //   message: "Such a beautiful wedding, congratulations!",
-      //   date: "2025-02-01",
-      // },
-      // {
-      //   id: 2,
-      //   name: "Jane Smith",
-      //   message: "I had an amazing time, thank you for inviting me!",
-      //   date: "2025-02-02",
-      // },
-      // {
-      //   id: 3,
-      //   name: "Alex Johnson",
-      //   message: "Wishing you both all the happiness in the world!",
-      //   date: "2025-02-03",
-      // },
-      // {
-      //   id: 4,
-      //   name: "Alex Johnson",
-      //   message: "Wishing you both all the happiness in the world!",
-      //   date: "2025-02-03",
-      // },
-      // ];
-      // setComments(fetchedComments);
+      const { data, error } = await supabase
+        .from("comments")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) console.error(error);
+      else setComments(data);
     };
 
     fetchComments();
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const { error } = await supabase
+      .from("comments")
+      .insert([{ name, message }]);
+    if (error) console.error(error);
+
+    setName("");
+    setMessage("");
+    window.location.reload(); // Refresh to show new comments
+  };
 
   // Open Single Image Modal for QR Code or any other image
   const openSingleImageModal = (
@@ -203,17 +203,47 @@ const WeddingPage = () => {
           </div>
         </div>
 
+        {/* Form Section */}
+        <section className="my-8 max-w-xl mx-auto bg-sunsetPink p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-center text-[#4E3B31] mb-6">
+            Share Your Wishes
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your Name"
+              className="border p-2 w-full mb-2 rounded-lg"
+              required
+            />
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Your Message"
+              className="border p-2 w-full mb-2 rounded-lg"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-sunsetOrange text-white px-6 py-3 rounded-lg w-full hover:bg-sunsetPeach transition-all"
+            >
+              Submit
+            </button>
+          </form>
+        </section>
+
         {/* Display the list of comments as cards */}
-        {/* <div className="mt-8 flex flex-wrap gap-4 justify-center">
-          {[comments].map((comment) => (
+        <div className="mt-8 flex flex-wrap gap-4 justify-center">
+          {comments.map((comment) => (
             <CommentCard
               key={comment.id}
               name={comment.name}
               message={comment.message}
-              date={comment.date}
+              date={new Date(comment.created_at).toLocaleDateString()}
             />
           ))}
-        </div> */}
+        </div>
       </div>
 
       {/* Thank You Message */}
