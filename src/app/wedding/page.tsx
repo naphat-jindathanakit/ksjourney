@@ -5,7 +5,7 @@ import Sidebar from "@/components/Sidebar"; // Import Sidebar component
 import ImageSlider from "@/components/ImageSlider"; // Import ImageSlider
 import SingleImageModal from "@/components/SingleImageModal"; // Import SingleImageModal component
 import ImageModal from "@/components/ImageModal"; // Import ImageModal component
-import CommentCard from "@/components/CommentCard"; // Import the CommentCard component
+// import CommentCard from "@/components/CommentCard"; // Import the CommentCard component
 
 const WeddingPage = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -15,7 +15,7 @@ const WeddingPage = () => {
   const [selectedImage, setSelectedImage] = useState<string>(""); // Image selected for SingleImageModal
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0); // To track the current image in modal
   const [isImageModalOpen, setIsImageModalOpen] = useState(false); // For Full Album Modal
-  const [comments, setComments] = useState<any[]>([]);
+  // const [comments, setComments] = useState<any[]>([]);
 
   // QR Code images (different album)
   const qrImages = ["/images/ksQr.jpg"];
@@ -41,34 +41,33 @@ const WeddingPage = () => {
   useEffect(() => {
     const fetchComments = async () => {
       // You can replace this with an actual fetch request to an API
-      const fetchedComments = [
-        {
-          id: 1,
-          name: "John Doe",
-          message: "Such a beautiful wedding, congratulations!",
-          date: "2025-02-01",
-        },
-        {
-          id: 2,
-          name: "Jane Smith",
-          message: "I had an amazing time, thank you for inviting me!",
-          date: "2025-02-02",
-        },
-        {
-          id: 3,
-          name: "Alex Johnson",
-          message: "Wishing you both all the happiness in the world!",
-          date: "2025-02-03",
-        },
-        {
-          id: 4,
-          name: "Alex Johnson",
-          message: "Wishing you both all the happiness in the world!",
-          date: "2025-02-03",
-        },
-      ];
+      // const fetchedComments = [
+      // {
+      //   id: 1,
+      //   name: "John Doe",
+      //   message: "Such a beautiful wedding, congratulations!",
+      //   date: "2025-02-01",
+      // },
+      // {
+      //   id: 2,
+      //   name: "Jane Smith",
+      //   message: "I had an amazing time, thank you for inviting me!",
+      //   date: "2025-02-02",
+      // },
+      // {
+      //   id: 3,
+      //   name: "Alex Johnson",
+      //   message: "Wishing you both all the happiness in the world!",
+      //   date: "2025-02-03",
+      // },
+      // {
+      //   id: 4,
+      //   name: "Alex Johnson",
+      //   message: "Wishing you both all the happiness in the world!",
+      //   date: "2025-02-03",
+      // },
+      // ];
       // setComments(fetchedComments);
-      setComments([]);
     };
 
     fetchComments();
@@ -138,7 +137,7 @@ const WeddingPage = () => {
         {/* Invitation Text */}
         <div className="bg-sunsetPink p-6 rounded-lg shadow-lg text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4 js-synjai-font">
-            You're Invited to Our Special Day!
+            {"You're Invited to Our Special Day!"}
           </h2>
           <p className="text-lg text-[#4E3B31] invitation-text">
             We are thrilled to share this joyous occasion with you! Join us as
@@ -205,8 +204,8 @@ const WeddingPage = () => {
         </div>
 
         {/* Display the list of comments as cards */}
-        <div className="mt-8 flex flex-wrap gap-4 justify-center">
-          {comments.map((comment) => (
+        {/* <div className="mt-8 flex flex-wrap gap-4 justify-center">
+          {[comments].map((comment) => (
             <CommentCard
               key={comment.id}
               name={comment.name}
@@ -214,7 +213,7 @@ const WeddingPage = () => {
               date={comment.date}
             />
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Thank You Message */}
