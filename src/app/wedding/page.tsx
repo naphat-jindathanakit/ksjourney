@@ -7,6 +7,7 @@ import SingleImageModal from "@/components/SingleImageModal"; // Import SingleIm
 import ImageModal from "@/components/ImageModal"; // Import ImageModal component
 import CommentCard from "@/components/CommentCard"; // Import the CommentCard component
 import { supabase } from "@/app/supabaseClient";
+import { FaCheckCircle, FaSpinner } from "react-icons/fa";
 interface Comment {
   id: string;
   name: string;
@@ -29,6 +30,8 @@ const WeddingPage = () => {
   const [message, setMessage] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [uploadError, setUploadError] = useState<string>("");
+  const [uploading, setUploading] = useState<boolean>(false); // State to handle upload status
+  const [uploaded, setUploaded] = useState<boolean>(false); // State to handle success status
 
   // QR Code images (different album)
   const qrImages = ["/images/ksQr.jpg"];
@@ -98,11 +101,13 @@ const WeddingPage = () => {
 
     setUploadError("");
     setFile(selectedFile);
+    setUploaded(false); // Reset success state when selecting a new file
   };
 
   const handleFileUpload = async () => {
     if (!file) return;
 
+    setUploading(true); // Set uploading state to true to show loading icon
     const filePath = `${Date.now()}_${file.name}`;
 
     const { error: storageError } = await supabase.storage
@@ -112,6 +117,7 @@ const WeddingPage = () => {
     if (storageError) {
       setUploadError("Failed to upload the file.");
       console.error(storageError);
+      setUploading(false); // Stop loading when an error occurs
       return;
     }
 
@@ -123,11 +129,14 @@ const WeddingPage = () => {
     if (dbError) {
       setUploadError("Failed to save file metadata.");
       console.error(dbError);
+      setUploading(false); // Stop loading when an error occurs
       return;
     }
 
+    setUploading(false); // Stop loading when upload is successful
+    setUploaded(true); // Set success state to true
     alert("Payslip uploaded successfully!");
-    setFile(null);
+    setFile(null); // Clear selected file after successful upload
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -299,7 +308,7 @@ const WeddingPage = () => {
 
               {/* Display filename if a file is selected */}
               {file && (
-                <span className="ml-4 text-sunsetYellow text-sm font-medium">
+                <span className="ml-4 text-sunsetYellow text-sm font-medium flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
                   {file.name}
                 </span>
               )}
@@ -310,16 +319,24 @@ const WeddingPage = () => {
               )}
             </div>
 
+            {/* Upload Payslip Button */}
             <button
               onClick={handleFileUpload}
               className={`bg-sunsetOrange text-white px-6 py-3 rounded-lg w-full transition-all ${
                 !file
                   ? "bg-gray-400 cursor-not-allowed"
                   : "hover:bg-sunsetPeach"
-              }`}
+              } flex items-center justify-center`} // Add flex to make everything align on one line
               disabled={!file}
             >
               Upload Payslip
+              {/* Show loading icon or success checkmark next to the button */}
+              {uploading && (
+                <FaSpinner className="ml-4 animate-spin" /> // Loading spinner icon
+              )}
+              {uploaded && (
+                <FaCheckCircle className="ml-4 text-green-500" /> // Success checkmark
+              )}
             </button>
           </div>
         </div>
