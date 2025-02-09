@@ -372,7 +372,7 @@ const WeddingPage = () => {
         </section>
 
         {/* Display the list of comments as cards */}
-        <div className="mt-8 flex flex-wrap gap-4 justify-center">
+        <div className="mt-8 flex flex-wrap justify-center">
           {comments.map((comment) => (
             <CommentCard
               key={comment.id}
