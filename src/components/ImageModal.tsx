@@ -13,7 +13,7 @@ const ImageModal: FC<ImageModalProps> = ({ isOpen, images, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-sunsetPurple bg-opacity-80 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg max-w-4xl w-full overflow-hidden relative shadow-2xl">
+      <div className="bg-colorfulPastel p-6 rounded-lg max-w-4xl w-full overflow-hidden relative shadow-2xl">
         {/* Close Button */}
         <button
           onClick={onClose}

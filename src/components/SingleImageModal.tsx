@@ -23,7 +23,7 @@ const SingleImageModal: FC<SingleImageModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-sunsetPurple bg-opacity-80 flex justify-center items-center z-50">
-      <div className="relative w-full max-w-4xl p-6 bg-white rounded-lg shadow-xl">
+      <div className="bg-colorfulPastel relative w-full max-w-4xl p-6 bg-white rounded-lg shadow-xl">
         {/* Close Button */}
         <button
           onClick={onClose}

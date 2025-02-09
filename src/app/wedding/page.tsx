@@ -13,6 +13,9 @@ interface Comment {
   message: string;
   created_at: string;
 }
+
+const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+
 const WeddingPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false); // Sidebar state
@@ -24,6 +27,8 @@ const WeddingPage = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [uploadError, setUploadError] = useState<string>("");
 
   // QR Code images (different album)
   const qrImages = ["/images/ksQr.jpg"];
@@ -59,6 +64,56 @@ const WeddingPage = () => {
 
     fetchComments();
   }, []);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+
+    if (selectedFile.size > MAX_FILE_SIZE) {
+      setUploadError("File size exceeds 2 MB.");
+      setFile(null);
+      return;
+    }
+
+    if (!["image/jpeg", "image/png"].includes(selectedFile.type)) {
+      setUploadError("Only JPEG or PNG images are allowed.");
+      setFile(null);
+      return;
+    }
+
+    setUploadError("");
+    setFile(selectedFile);
+  };
+
+  const handleFileUpload = async () => {
+    if (!file) return;
+
+    const filePath = `payslips/${Date.now()}_${file.name}`;
+
+    const { error: storageError } = await supabase.storage
+      .from("payslips")
+      .upload(filePath, file);
+
+    if (storageError) {
+      setUploadError("Failed to upload the file.");
+      console.error(storageError);
+      return;
+    }
+
+    // Save the file metadata to the database
+    const { error: dbError } = await supabase
+      .from("payslip_uploads")
+      .insert([{ file_path: filePath }]);
+
+    if (dbError) {
+      setUploadError("Failed to save file metadata.");
+      console.error(dbError);
+      return;
+    }
+
+    alert("Payslip uploaded successfully!");
+    setFile(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,7 +182,9 @@ const WeddingPage = () => {
 
       {/* Main content */}
       <div
-        className={`flex-1 p-6 ${!isOpen ? "ml-16" : "ml-60"} bg-sunsetOrange`}
+        className={`flex-1 p-6 ${
+          !isOpen ? "ml-16" : "ml-60"
+        } bg-colorfulPastel`}
       >
         {/* Wedding Page Header */}
         <h1 className="text-4xl font-bold text-sunsetYellow mb-6 text-center signature-font">
@@ -186,12 +243,12 @@ const WeddingPage = () => {
           </div>
         </div>
 
-        {/* QR Code with "Support Us" heading */}
+        {/* QR Code with "Support Us" heading and Upload Payslip Section */}
         <div className="bg-sunsetPurple p-8 rounded-lg shadow-md mt-8 w-full max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold text-white mb-4 text-center">
+          <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4 text-center">
             Support Us
           </h2>
-          <div className="flex justify-center">
+          <div className="flex justify-center mb-6">
             <img
               src="/images/ksQr.jpg"
               alt="QR Code"
@@ -200,6 +257,55 @@ const WeddingPage = () => {
                 openSingleImageModal("/images/ksQr.jpg", 0, qrImages)
               }
             />
+          </div>
+
+          {/* Upload Payslip Section */}
+          <div className="bg-sunsetGreen p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-[#4E3B31] text-center mb-6">
+              We Appreciate Your Support! Please Share Your Payslip
+            </h2>
+
+            {/* File Upload Section */}
+            <div className="my-4 flex items-center">
+              <label
+                htmlFor="file-upload"
+                className="bg-gradient-to-r from-sunsetOrange to-sunsetPeach text-white font-semibold text-lg py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-sunsetPeach transition-all"
+              >
+                Choose File
+              </label>
+
+              <input
+                id="file-upload"
+                type="file"
+                accept="image/png, image/jpeg"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+
+              {/* Display filename if a file is selected */}
+              {file && (
+                <span className="ml-4 text-sunsetYellow text-sm font-medium">
+                  {file.name}
+                </span>
+              )}
+
+              {/* Display any upload error */}
+              {uploadError && (
+                <p className="text-red-600 ml-4">{uploadError}</p>
+              )}
+            </div>
+
+            <button
+              onClick={handleFileUpload}
+              className={`bg-sunsetOrange text-white px-6 py-3 rounded-lg w-full transition-all ${
+                !file
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "hover:bg-sunsetPeach"
+              }`}
+              disabled={!file}
+            >
+              Upload Payslip
+            </button>
           </div>
         </div>
 
@@ -248,7 +354,7 @@ const WeddingPage = () => {
 
       {/* Thank You Message */}
       <div
-        className={`bg-sunsetPeach text-white py-4 mt-auto text-center ${
+        className={`bg-sunsetPurple text-[#4E3B31] py-4 mt-auto text-center ${
           !isOpen ? "ml-16" : "ml-60"
         }`}
       >

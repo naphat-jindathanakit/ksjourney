@@ -18,7 +18,7 @@ const Page = () => {
       <div
         className={`flex-1 p-6 flex flex-col items-center justify-start transition-all duration-300 ${
           !isOpen ? "ml-16" : "ml-60"
-        } `} // Adjust for mobile and larger screens
+        } bg-colorfulPastel`} // Adjust for mobile and larger screens
       >
         {/* Header Section */}
         <h1 className="text-3xl md:text-5xl font-bold text-center text-sunsetYellow mb-6 mt-8">

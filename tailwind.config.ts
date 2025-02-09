@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        colorfulPastel: "linear-gradient(to bottom, #FF9A8B, #FFCC99, #D1A7E2)",
+      },
       colors: {
         sunsetOrange: "#FF9A8B",
         sunsetPink: "#FFB6C1",
