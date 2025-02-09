@@ -40,11 +40,26 @@ const WeddingPage = () => {
   const toggleSidebar = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
-    // Fetch the image list from the API route
     const fetchImages = async () => {
-      const res = await fetch("/api/get-wedding-images");
-      const data = await res.json();
-      setImages(data);
+      // Attempt to fetch the list of files in the root folder
+      const { data, error } = await supabase.storage
+        .from("prewedding")
+        .list(""); // Root folder
+
+      if (error) {
+        throw error;
+      }
+
+      if (data?.length > 0) {
+        const imageUrls = data.map((file) => {
+          // Check if the public URL is correctly generated for each file
+          const publicUrl = supabase.storage
+            .from("prewedding")
+            .getPublicUrl(file.name).data.publicUrl;
+          return publicUrl;
+        });
+        setImages(imageUrls);
+      }
     };
 
     fetchImages();
@@ -88,7 +103,7 @@ const WeddingPage = () => {
   const handleFileUpload = async () => {
     if (!file) return;
 
-    const filePath = `payslips/${Date.now()}_${file.name}`;
+    const filePath = `${Date.now()}_${file.name}`;
 
     const { error: storageError } = await supabase.storage
       .from("payslips")
