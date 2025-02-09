@@ -16,7 +16,7 @@ const ImageSlider = ({ images, onImageClick }: ImageSliderProps) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextImage, 2000); // Auto-slide every 3 seconds
+    const interval = setInterval(nextImage, 1500); // Auto-slide every 3 seconds
     return () => clearInterval(interval); // Clear the interval on component unmount
   }, [images.length]);
 

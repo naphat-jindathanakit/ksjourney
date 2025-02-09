@@ -290,7 +290,7 @@ const WeddingPage = () => {
             </h2>
 
             {/* File Upload Section */}
-            <div className="my-4 flex items-center">
+            <div className="my-4 flex items-center flex-wrap">
               <label
                 htmlFor="file-upload"
                 className="bg-gradient-to-r from-sunsetOrange to-sunsetPeach text-white font-semibold text-lg py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-sunsetPeach transition-all"
@@ -308,7 +308,7 @@ const WeddingPage = () => {
 
               {/* Display filename if a file is selected */}
               {file && (
-                <span className="ml-4 text-sunsetYellow text-sm font-medium flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
+                <span className="ml-4 text-sunsetYellow text-sm font-medium flex-1 max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                   {file.name}
                 </span>
               )}

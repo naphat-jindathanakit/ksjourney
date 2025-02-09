@@ -28,7 +28,7 @@ const Page = () => {
         {/* Center Image */}
         <div className="mb-6 max-w-full w-[90%] md:w-auto">
           <img
-            src="/images/Wedding-99.jpg" // Replace with your actual image path
+            src="/images/Wedding-1.jpg" // Replace with your actual image path
             alt="Kwang & Suea"
             className="w-full md:max-w-lg rounded-lg shadow-lg"
           />
