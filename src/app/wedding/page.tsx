@@ -322,10 +322,10 @@ const WeddingPage = () => {
             {/* Upload Payslip Button */}
             <button
               onClick={handleFileUpload}
-              className={`bg-sunsetOrange text-white px-6 py-3 rounded-lg w-full transition-all ${
+              className={`text-white px-6 py-3 rounded-lg w-full transition-all ${
                 !file
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "hover:bg-sunsetPeach"
+                  ? "cursor-not-allowed"
+                  : "bg-sunsetOrange hover:bg-sunsetPeach"
               } flex items-center justify-center`} // Add flex to make everything align on one line
               disabled={!file}
             >
