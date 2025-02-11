@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"; // Import icons
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null); // Track selected menu
   const [isOpen, setIsOpen] = useState<boolean>(false); // Track sidebar open/close state
   const router = useRouter(); // Use the Next.js router from next/navigation
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(); // Access i18n and translation function
 
   useEffect(() => {
     const storedMenu = localStorage.getItem("selectedMenu"); // Get saved menu from localStorage
@@ -34,19 +34,23 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
     }
   };
 
+  const handleLanguageSwitch = () => {
+    const newLang = i18n.language === "en" ? "th" : "en"; // Switch language between en and th
+    i18n.changeLanguage(newLang); // Change the language
+  };
+
   return (
     <div
       className={`fixed top-0 left-0 z-50 flex flex-col bg-sunsetPurple text-white p-4 ${
         isOpen ? "w-60" : "w-16"
-      } h-full min-h-screen transition-all duration-300`} // Use sunsetPurple for contrast with background
+      } h-full min-h-screen transition-all duration-300`}
     >
       {/* Sidebar content */}
       {isOpen && (
-        <div className="flex flex-col items-center mb-6 w-full">
+        <div className="flex flex-col items-center mb-6 w-full flex-grow">
           <h2 className="text-lg font-bold mb-4 text-sunsetYellow">
             {t("menu")}
           </h2>
-          {/* Bold "Menu" text with a contrasting color */}
           <ul className="space-y-4 w-full">
             <li
               className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
@@ -68,23 +72,45 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
             >
               {t("wedding")}
             </li>
-            {/* Add other menu items here */}
           </ul>
         </div>
       )}
+      {/* Language switch button */}
+      <div className="mt-auto mb-4 flex justify-center items-center">
+        <button
+          onClick={handleLanguageSwitch} // Switch the language when clicked
+          className={`${
+            isOpen ? "w-full py-2" : "w-10 h-10"
+          } bg-sunsetPeach rounded-full text-black hover:bg-sunsetYellow transition-colors flex items-center justify-center`}
+        >
+          {/* If sidebar is expanded, display the language text, otherwise show the flag */}
+          {isOpen ? (
+            i18n.language === "en" ? (
+              "เปลี่ยนภาษา"
+            ) : (
+              "Change Language"
+            )
+          ) : (
+            <span className="text-2xl">
+              {i18n.language === "en" ? "🇹🇭" : "🇺🇸"} {/* Larger flag emoji */}
+            </span>
+          )}
+        </button>
+      </div>
 
-      {/* Toggle button */}
-      <button
-        onClick={handleToggleSidebar} // Toggle the sidebar open/close when clicked
-        className="absolute bottom-8 left-4 p-2 bg-sunsetPeach rounded-full hover:bg-sunsetYellow transition-colors"
-      >
-        {/* Show the appropriate arrow icon */}
-        {isOpen ? (
-          <ChevronLeftIcon className="h-6 w-6 text-white" />
-        ) : (
-          <ChevronRightIcon className="h-6 w-6 text-white" />
-        )}
-      </button>
+      {/* Expand/collapse button */}
+      <div className="mt-4 flex justify-center items-center">
+        <button
+          onClick={handleToggleSidebar} // Toggle the sidebar open/close when clicked
+          className="p-2 bg-sunsetPeach rounded-full hover:bg-sunsetYellow transition-colors w-10 h-10 flex items-center justify-center"
+        >
+          {isOpen ? (
+            <ChevronLeftIcon className="h-6 w-6 text-white" />
+          ) : (
+            <ChevronRightIcon className="h-6 w-6 text-white" />
+          )}
+        </button>
+      </div>
     </div>
   );
 };
