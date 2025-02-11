@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"; // Import icons
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
+import { useTranslation } from "react-i18next";
 
 const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null); // Track selected menu
   const [isOpen, setIsOpen] = useState<boolean>(false); // Track sidebar open/close state
   const router = useRouter(); // Use the Next.js router from next/navigation
+  const { t } = useTranslation();
 
   useEffect(() => {
     const storedMenu = localStorage.getItem("selectedMenu"); // Get saved menu from localStorage
@@ -41,7 +43,9 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
       {/* Sidebar content */}
       {isOpen && (
         <div className="flex flex-col items-center mb-6 w-full">
-          <h2 className="text-lg font-bold mb-4 text-sunsetYellow">Menu</h2>{" "}
+          <h2 className="text-lg font-bold mb-4 text-sunsetYellow">
+            {t("menu")}
+          </h2>
           {/* Bold "Menu" text with a contrasting color */}
           <ul className="space-y-4 w-full">
             <li
@@ -52,7 +56,7 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
               }`}
               onClick={() => navigateTo("Home")}
             >
-              Home
+              {t("home")}
             </li>
             <li
               className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
@@ -62,7 +66,7 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
               }`}
               onClick={() => navigateTo("Wedding")}
             >
-              Wedding
+              {t("wedding")}
             </li>
             {/* Add other menu items here */}
           </ul>

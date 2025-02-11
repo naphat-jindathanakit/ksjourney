@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar"; // Import Sidebar component
+import { useTranslation } from "react-i18next";
 
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false); // Manage the state of the sidebar
-
+  const { t } = useTranslation();
   // Function to toggle the sidebar open/close
   const toggleSidebar = () => setIsOpen((prev) => !prev);
 
@@ -22,7 +23,7 @@ const Page = () => {
       >
         {/* Header Section */}
         <h1 className="text-3xl md:text-5xl font-bold text-center text-sunsetYellow mb-6 mt-8">
-          Kwang & Suea Journey
+          {t("home_header")}
         </h1>
 
         {/* Center Image */}
@@ -36,12 +37,7 @@ const Page = () => {
 
         {/* Description Block */}
         <div className="bg-sunsetPink p-6 rounded-lg shadow-lg text-center max-w-3xl w-full">
-          <p className="text-lg text-[#4E3B31]">
-            We are Kwang & Suea, two souls bound by love and destiny. Our
-            journey has been one full of laughter, adventures, and beautiful
-            memories. We are excited to share the next chapter of our story
-            together with you!
-          </p>
+          <p className="text-lg text-[#4E3B31]">{t("home_message")}</p>
         </div>
       </div>
     </div>

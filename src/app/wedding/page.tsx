@@ -8,6 +8,8 @@ import ImageModal from "@/components/ImageModal"; // Import ImageModal component
 import CommentCard from "@/components/CommentCard"; // Import the CommentCard component
 import { supabase } from "@/app/supabaseClient";
 import { FaCheckCircle, FaSpinner } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+
 interface Comment {
   id: string;
   name: string;
@@ -32,6 +34,7 @@ const WeddingPage = () => {
   const [uploadError, setUploadError] = useState<string>("");
   const [uploading, setUploading] = useState<boolean>(false); // State to handle upload status
   const [uploaded, setUploaded] = useState<boolean>(false); // State to handle success status
+  const { t } = useTranslation();
 
   // QR Code images (different album)
   const qrImages = ["/images/ksQr.jpg"];
@@ -212,18 +215,16 @@ const WeddingPage = () => {
       >
         {/* Wedding Page Header */}
         <h1 className="text-4xl font-bold text-sunsetYellow mb-6 text-center signature-font">
-          Kwang & Suea Wedding
+          {t("wedding_header")}
         </h1>
 
         {/* Invitation Text */}
         <div className="bg-sunsetPink p-6 rounded-lg shadow-lg text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4 js-synjai-font">
-            {"You're Invited to Our Special Day!"}
+            {t("greeting")}
           </h2>
           <p className="text-lg text-[#4E3B31] invitation-text">
-            We are thrilled to share this joyous occasion with you! Join us as
-            we celebrate the union of two hearts, bound together by love and
-            destiny. Your presence will make this day even more memorable.
+            {t("greeting_message")}
           </p>
         </div>
 
@@ -240,7 +241,7 @@ const WeddingPage = () => {
           onClick={openImageModal} // Open the ImageModal when clicked
           className="bg-sunsetYellow text-sunsetOrange px-6 py-3 rounded-lg mb-8 hover:bg-sunsetPeach transition-all duration-300 block mx-auto"
         >
-          View Full Album
+          {t("view_full_album")}
         </button>
 
         {/* Two Images horizontally aligned (Responsive) */}
@@ -270,7 +271,7 @@ const WeddingPage = () => {
         {/* QR Code with "Support Us" heading and Upload Payslip Section */}
         <div className="bg-sunsetPurple p-8 rounded-lg shadow-md mt-8 w-full max-w-2xl mx-auto">
           <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4 text-center">
-            Support Us
+            {t("support_us")}
           </h2>
           <div className="flex justify-center mb-6">
             <img
@@ -286,7 +287,7 @@ const WeddingPage = () => {
           {/* Upload Payslip Section */}
           <div className="bg-sunsetGreen p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-[#4E3B31] text-center mb-6">
-              We Appreciate Your Support! Please Share Your Payslip
+              {t("please_upload_payslip")}
             </h2>
 
             {/* File Upload Section */}
@@ -295,7 +296,7 @@ const WeddingPage = () => {
                 htmlFor="file-upload"
                 className="bg-gradient-to-r from-sunsetOrange to-sunsetPeach text-white font-semibold text-lg py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-sunsetPeach transition-all"
               >
-                Choose File
+                {t("choose_file")}
               </label>
 
               <input
@@ -329,7 +330,7 @@ const WeddingPage = () => {
               } flex items-center justify-center`} // Add flex to make everything align on one line
               disabled={!file}
             >
-              Upload Payslip
+              {t("upload_payslip")}
               {/* Show loading icon or success checkmark next to the button */}
               {uploading && (
                 <FaSpinner className="ml-4 animate-spin" /> // Loading spinner icon
@@ -344,21 +345,21 @@ const WeddingPage = () => {
         {/* Form Section */}
         <section className="my-8 max-w-xl mx-auto bg-sunsetPink p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-center text-[#4E3B31] mb-6">
-            Share Your Wishes
+            {t("wedding_comment")}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your Name"
+              placeholder={t("your_name")}
               className="border p-2 w-full mb-2 rounded-lg"
               required
             />
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Your Message"
+              placeholder={t("your_message")}
               className="border p-2 w-full mb-2 rounded-lg"
               required
             />
@@ -366,7 +367,7 @@ const WeddingPage = () => {
               type="submit"
               className="bg-sunsetOrange text-white px-6 py-3 rounded-lg w-full hover:bg-sunsetPeach transition-all"
             >
-              Submit
+              {t("submit")}
             </button>
           </form>
         </section>
@@ -390,9 +391,7 @@ const WeddingPage = () => {
           !isOpen ? "ml-16" : "ml-60"
         }`}
       >
-        <p className="text-lg font-semibold">
-          Thank you for celebrating with us!
-        </p>
+        <p className="text-lg font-semibold">{t("wedding_thankyou")}</p>
       </div>
 
       {/* Single Image Modal for QR Code, Image1, and Image2 */}
