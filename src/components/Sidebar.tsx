@@ -1,7 +1,12 @@
-"use client"; // Make sure this is a client component
+"use client"; // Ensure this is a client component
 
 import { useEffect, useState } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"; // Import icons
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  HomeIcon,
+  CakeIcon,
+} from "@heroicons/react/24/solid"; // Import icons
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
 import { useTranslation } from "react-i18next"; // Import useTranslation
 
@@ -45,71 +50,76 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
         isOpen ? "w-60" : "w-16"
       } h-full min-h-screen transition-all duration-300`}
     >
-      {/* Sidebar content */}
-      {isOpen && (
-        <div className="flex flex-col items-center mb-6 w-full flex-grow">
-          <h2 className="text-lg font-bold mb-4 text-sunsetYellow">
-            {t("menu")}
-          </h2>
-          <ul className="space-y-4 w-full">
-            <li
-              className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
-                selectedMenu === "Home"
-                  ? "bg-sunsetYellow"
-                  : "hover:bg-sunsetYellow"
-              }`}
-              onClick={() => navigateTo("Home")}
-            >
-              {t("home")}
-            </li>
-            <li
-              className={`flex items-center justify-center p-4 w-full cursor-pointer transition-colors duration-200 rounded-lg ${
-                selectedMenu === "Wedding"
-                  ? "bg-sunsetGreen"
-                  : "hover:bg-sunsetGreen"
-              }`}
-              onClick={() => navigateTo("Wedding")}
-            >
-              {t("wedding")}
-            </li>
-          </ul>
-        </div>
-      )}
-      {/* Language switch button */}
-      <div className="mt-auto mb-4 flex justify-center items-center">
+      {/* Sidebar content - Position menu at the top & center horizontally */}
+      <div className="flex flex-col items-center space-y-4 w-full">
+        {/* Home Button */}
         <button
-          onClick={handleLanguageSwitch} // Switch the language when clicked
-          className={`${
-            isOpen ? "w-full py-2" : "w-10 h-10"
-          } bg-sunsetPeach rounded-full text-black hover:bg-sunsetYellow transition-colors flex items-center justify-center`}
+          className={`flex items-center justify-center ${
+            isOpen ? "p-3 w-full rounded-lg" : "w-12 h-12 rounded-full"
+          } cursor-pointer transition-all ${
+            selectedMenu === "Home"
+              ? "bg-sunsetYellow text-black"
+              : "hover:bg-sunsetYellow"
+          }`}
+          onClick={() => navigateTo("Home")}
         >
-          {/* If sidebar is expanded, display the language text, otherwise show the flag */}
-          {isOpen ? (
-            i18n.language === "en" ? (
-              "เปลี่ยนภาษา"
-            ) : (
-              "Change Language"
-            )
-          ) : (
-            <span className="text-2xl">
-              {i18n.language === "en" ? "🇹🇭" : "🇺🇸"} {/* Larger flag emoji */}
-            </span>
-          )}
+          <HomeIcon className="h-6 w-6 text-white" />
+          {isOpen && <span className="ml-3 text-white">{t("home")}</span>}
+        </button>
+
+        {/* Wedding Button */}
+        <button
+          className={`flex items-center justify-center ${
+            isOpen ? "p-3 w-full rounded-lg" : "w-12 h-12 rounded-full"
+          } cursor-pointer transition-all ${
+            selectedMenu === "Wedding"
+              ? "bg-sunsetGreen text-black"
+              : "hover:bg-sunsetGreen"
+          }`}
+          onClick={() => navigateTo("Wedding")}
+        >
+          <CakeIcon className="h-6 w-6 text-white" />
+          {isOpen && <span className="ml-3 text-white">{t("wedding")}</span>}
         </button>
       </div>
 
-      {/* Expand/collapse button */}
-      <div className="mt-4 flex justify-center items-center">
-        <button
-          onClick={handleToggleSidebar} // Toggle the sidebar open/close when clicked
-          className="p-2 bg-sunsetPeach rounded-full hover:bg-sunsetYellow transition-colors w-10 h-10 flex items-center justify-center"
-        >
-          {isOpen ? (
-            <ChevronLeftIcon className="h-6 w-6 text-white" />
-          ) : (
-            <ChevronRightIcon className="h-6 w-6 text-white" />
-          )}
-        </button>
+      {/* Push other elements to the bottom */}
+      <div className="flex flex-col justify-end flex-grow">
+        {/* Language switch button */}
+        <div className="mb-4 flex justify-center items-center">
+          <button
+            onClick={handleLanguageSwitch} // Switch the language when clicked
+            className={`${
+              isOpen ? "w-full py-2 rounded-lg" : "w-12 h-12"
+            } bg-sunsetPeach rounded-full text-black hover:bg-sunsetYellow transition-colors flex items-center justify-center`}
+          >
+            {isOpen ? (
+              <span className="text-white">
+                {i18n.language === "en"
+                  ? "🇹🇭 เปลี่ยนภาษา"
+                  : "🇺🇸 Change Language"}
+              </span>
+            ) : (
+              <span className="text-2xl">
+                {i18n.language === "en" ? "🇹🇭" : "🇺🇸"}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Expand/collapse button */}
+        <div className="mb-4 flex justify-center items-center">
+          <button
+            onClick={handleToggleSidebar} // Toggle the sidebar open/close when clicked
+            className={`w-12 h-12 rounded-full bg-sunsetPeach hover:bg-sunsetYellow transition-colors flex items-center justify-center`}
+          >
+            {isOpen ? (
+              <ChevronLeftIcon className="h-6 w-6 text-white" />
+            ) : (
+              <ChevronRightIcon className="h-6 w-6 text-white" />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
