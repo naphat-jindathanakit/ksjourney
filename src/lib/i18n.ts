@@ -15,7 +15,7 @@ const resources = {
         "We are thrilled to share this joyous occasion with you! Join us as we celebrate the union of two hearts, bound together by love and destiny. Your presence will make this day even more memorable.",
       support_us: "Support Us",
       please_upload_payslip:
-        "We Appreciate Your Support! Please Share Your Payslip",
+        "We appreciate your support! Please share your payslip",
       view_full_album: "View Full Album",
       choose_file: "Choose File",
       upload_payslip: "Upload Payslip",
