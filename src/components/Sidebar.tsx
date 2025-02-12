@@ -5,7 +5,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   HomeIcon,
-  CakeIcon,
+  HeartIcon,
 } from "@heroicons/react/24/solid"; // Import icons
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
 import { useTranslation } from "react-i18next"; // Import useTranslation
@@ -78,7 +78,7 @@ const Sidebar = ({ onToggle }: { onToggle: () => void }) => {
           }`}
           onClick={() => navigateTo("Wedding")}
         >
-          <CakeIcon className="h-6 w-6 text-white" />
+          <HeartIcon className="h-6 w-6 text-white" />
           {isOpen && <span className="ml-3 text-white">{t("wedding")}</span>}
         </button>
       </div>

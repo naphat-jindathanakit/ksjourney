@@ -214,13 +214,13 @@ const WeddingPage = () => {
         } bg-colorfulPastel`}
       >
         {/* Wedding Page Header */}
-        <h1 className="text-4xl font-bold text-sunsetYellow mb-6 text-center signature-font">
+        <h1 className="text-sunsetYellow mb-6 text-center signature-font">
           {t("wedding_header")}
         </h1>
 
         {/* Invitation Text */}
         <div className="bg-sunsetPink p-6 rounded-lg shadow-lg text-center max-w-3xl mx-auto mb-8">
-          <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4 js-synjai-font">
+          <h2 className=" text-[#4E3B31] mb-4 js-synjai-font">
             {t("greeting")}
           </h2>
           <p className="text-lg text-[#4E3B31] invitation-text">
@@ -270,7 +270,7 @@ const WeddingPage = () => {
 
         {/* QR Code with "Support Us" heading and Upload Payslip Section */}
         <div className="bg-sunsetPurple p-8 rounded-lg shadow-md mt-8 w-full max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold text-[#4E3B31] mb-4 text-center">
+          <h2 className=" text-[#4E3B31] mb-4 text-center">
             {t("support_us")}
           </h2>
           <div className="flex justify-center mb-6">
@@ -286,15 +286,15 @@ const WeddingPage = () => {
 
           {/* Upload Payslip Section */}
           <div className="bg-sunsetGreen p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-[#4E3B31] text-center mb-6">
+            <h3 className="text-[#4E3B31] text-center mb-6 ">
               {t("please_upload_payslip")}
-            </h2>
+            </h3>
 
             {/* File Upload Section */}
             <div className="my-4 flex items-center flex-wrap">
               <label
                 htmlFor="file-upload"
-                className="bg-gradient-to-r from-sunsetOrange to-sunsetPeach text-white font-semibold text-lg py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-sunsetPeach transition-all"
+                className="bg-gradient-to-r from-sunsetOrange to-sunsetPeach text-white font-semibold py-2 px-4 rounded-lg shadow-md cursor-pointer hover:bg-sunsetPeach transition-all"
               >
                 {t("choose_file")}
               </label>
@@ -344,7 +344,7 @@ const WeddingPage = () => {
 
         {/* Form Section */}
         <section className="my-8 max-w-xl mx-auto bg-sunsetPink p-8 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-center text-[#4E3B31] mb-6">
+          <h2 className=" text-center text-[#4E3B31] mb-6">
             {t("wedding_comment")}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
